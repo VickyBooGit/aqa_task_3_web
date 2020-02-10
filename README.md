@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/8xsjdcm15a36m346/branch/master?svg=true)](https://ci.appveyor.com/project/VickyBooGit/aqa-task-3-web/branch/master)
