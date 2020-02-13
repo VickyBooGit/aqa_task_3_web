@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,7 +20,7 @@ public class CallbackTest {
 
     @BeforeAll
     static void setUpAll() {
-        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.chromedriver().setup();
     }
 
     @BeforeEach
@@ -29,16 +28,16 @@ public class CallbackTest {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
-//        ChromeOptions options = new ChromeOptions();
-//
-//        options.addArguments("--no-sandbox"); // Bypass OS security model
-//        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-//        options.addArguments("start-maximized"); // open Browser in maximized mode
-//        options.addArguments("disable-infobars"); // disabling infobars
-//        options.addArguments("--disable-extensions"); // disabling extensions
-//        options.addArguments("--disable-gpu"); // applicable to windows os only
-//        options.merge(capabilities);
-        driver = new FirefoxDriver();
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--no-sandbox"); // Bypass OS security model
+        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+        options.addArguments("start-maximized"); // open Browser in maximized mode
+        options.addArguments("disable-infobars"); // disabling infobars
+        options.addArguments("--disable-extensions"); // disabling extensions
+        options.addArguments("--disable-gpu"); // applicable to windows os only
+        options.merge(capabilities);
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
