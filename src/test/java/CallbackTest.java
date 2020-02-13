@@ -1,25 +1,47 @@
-import org.junit.jupiter.api.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class CallbackTest {
-
-
     private WebDriver driver;
 
 
+//    @BeforeClass
+//    public static void setupClass() {
+//
+//        WebDriverManager.chromedriver().setup();
+//    }
+//
+//    @Before
+//    public void setupTest() {
+//        driver = new ChromeDriver();
+//    }
+//
+//    @After
+//    public void teardown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
     @BeforeAll
     static void setUpAll() {
         System.setProperty("webdriver.chrome.driver", "./driver/win/chromedriver.exe");
+       // System.setProperty("webdriver.chrome.driver", "./driver/linux/chromedriver");
     }
 
     @BeforeEach
@@ -34,7 +56,8 @@ public class CallbackTest {
     }
 
     @Test
-    void shouldTestV1() {
+    void shouldSendRequest() {
+        //WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("http://localhost:9999");
         WebElement form = driver.findElement(By.cssSelector("[class] form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван Иванович");
