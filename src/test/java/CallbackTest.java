@@ -26,18 +26,18 @@ public class CallbackTest {
     @BeforeEach
     void setUp() {
 
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-
-        ChromeOptions options = new ChromeOptions();
-
-        options.addArguments("--no-sandbox"); // Bypass OS security model
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.addArguments("start-maximized"); // open Browser in maximized mode
-        options.addArguments("disable-infobars"); // disabling infobars
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.merge(capabilities);
-        driver = new ChromeDriver(options);
+//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+//
+//        ChromeOptions options = new ChromeOptions();
+//
+//        options.addArguments("--no-sandbox"); // Bypass OS security model
+//        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+//        options.addArguments("start-maximized"); // open Browser in maximized mode
+//        options.addArguments("disable-infobars"); // disabling infobars
+//        options.addArguments("--disable-extensions"); // disabling extensions
+//        options.addArguments("--disable-gpu"); // applicable to windows os only
+//        options.merge(capabilities);
+        driver = new ChromeDriver();
     }
 
     @AfterEach
@@ -50,7 +50,7 @@ public class CallbackTest {
 
     @Test
     void shouldSendRequest() {
-//        WebDriverWait wait = new WebDriverWait(driver, 30);
+      WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("http://localhost:9999");
         WebElement form = driver.findElement(By.cssSelector("[class] form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван Иванович");
