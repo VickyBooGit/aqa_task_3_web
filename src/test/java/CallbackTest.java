@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,9 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,23 +24,14 @@ public class CallbackTest {
     @BeforeEach
     void setUp() {
 
-//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-//
-//        ChromeOptions options = new ChromeOptions();
-//
-//        options.addArguments("--no-sandbox"); // Bypass OS security model
-//        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-//        options.addArguments("start-maximized"); // open Browser in maximized mode
-//        options.addArguments("disable-infobars"); // disabling infobars
-//        options.addArguments("--disable-extensions"); // disabling extensions
-//        options.addArguments("--disable-gpu"); // applicable to windows os only
-//        options.merge(capabilities);
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
     void tearDown() {
-        if(driver!=null){
+        if (driver != null) {
             driver.quit();
             driver = null;
         }
@@ -50,7 +39,6 @@ public class CallbackTest {
 
     @Test
     void shouldSendRequest() {
-     WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.get("http://localhost:9999");
         WebElement form = driver.findElement(By.cssSelector("[class] form"));
         form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван Иванович");
@@ -59,8 +47,5 @@ public class CallbackTest {
         form.findElement(By.cssSelector("[type=button]")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
-
-
     }
-
 }
